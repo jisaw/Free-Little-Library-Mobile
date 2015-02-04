@@ -1,7 +1,8 @@
 <!doctype html>
 <html lang="en" ng-app="APP">
 <head>
-<style type="text/css">.angular-google-map-container {height: 600px;}</style>
+<style type="text/css">.angular-google-map-container {height: 100%;}
+</style>
 <link rel="stylesheet" type="text/css" href="bower_components/ratchet/dist/css/ratchet.css"/>
 <link rel="stylesheet" type="text/css" href="bower_components/bootstrap-css/bootstrap.css"/>
     <meta charset="UTF-8">
@@ -47,17 +48,14 @@
 
 
 
-
+<script src='//maps.googleapis.com/maps/api/js?sensor=false'></script>
 <script type="text/javascript" src="bower_components/angular/angular.js"></script>
 <script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
 <script type="text/javascript" src="bower_components/lodash/dist/lodash.js"></script>
 <script type="text/javascript" src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
-<script
-src="http://maps.googleapis.com/maps/api/js">
-</script>
 
 <script>
-	var app = angular.module('APP', ['ngRoute']);
+	var app = angular.module('APP', ['ngRoute', 'uiGmapgoogle-maps']);
 	app.
 	config(['$routeProvider', function($routeProvider){
 		$routeProvider.
@@ -100,7 +98,8 @@ src="http://maps.googleapis.com/maps/api/js">
 	})
 	app.controller('mapCont', function($scope) {
 		$scope.title = 'Little Free Libs Map';
-		
+		$scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
+
 	})
 	app.controller('listCont', function($scope, $http) {
 		$scope.title = 'List of Little Free Libs';
