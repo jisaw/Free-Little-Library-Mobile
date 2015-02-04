@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en" ng-app="APP">
+<head>
+<style type="text/css">.angular-google-map-container {height: 600px;}</style>
+<link rel="stylesheet" type="text/css" href="bower_components/ratchet/dist/css/ratchet.css"/>
+<link rel="stylesheet" type="text/css" href="bower_components/bootstrap-css/bootstrap.css"/>
+    <meta charset="UTF-8">
+    <title>Routing</title>
+</head>
+<body ng-controller="mainCont">
+
+<nav class="bar bar-standard">
+<header class="bar bar-nav">
+	<a ng-click="botNavClick('botHome')" href="/#/" class="icon icon-home pull-left"></a>
+	<a ng-click="botNavClick('botList')" href="/#/list" class="icon icon-search pull-right"></a>
+	<h1 class="title">Free Little Library Locator</h1>
+</header>
+</nav>
+
+<footer ng-init="botBtns = ['botHome', 'botMap', 'botList', 'botAbout']">
+	<nav class="bar bar-tab">
+  <a ng-click="botNavClick('botHome')" class="tab-item" id='botHome' href="/#/">
+    <span class="tab-label">Home</span>
+  </a>
+  <a ng-click="botNavClick('botMap')" class="tab-item" id="botMap" href="/#/map">
+    <span class="tab-label">Map</span>
+  </a>
+  <a ng-click="botNavClick('botList')" class="tab-item" id='botList' href="/#/list">
+    <span class="tab-label">List</span>
+  </a>
+  <a ng-click="botNavClick('botAbout')" class="tab-item" id="botAbout" href="/#/about">
+    <span class="tab-label">About</span>
+  </a>
+ 
+	</nav>
+</footer>
+
+<br><br><br>
+<div class='content'>
+<br><br>
+<div ng-view></div>
+</div>
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="bower_components/angular/angular.js"></script>
+<script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
+<script type="text/javascript" src="bower_components/lodash/dist/lodash.js"></script>
+<script type="text/javascript" src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
+<script
+src="http://maps.googleapis.com/maps/api/js">
+</script>
+
+<script>
+	var app = angular.module('APP', ['ngRoute']);
+	app.
+	config(['$routeProvider', function($routeProvider){
+		$routeProvider.
+		when('/', {
+			templateUrl: 'map.html',
+			controller: "indexCont"
+		}).
+		when('/map', {
+			templateUrl: 'map.html',
+			controller: 'mapCont'
+		}).
+		when('/list', {
+			templateUrl: 'list.html',
+			controller: 'listCont'
+		}).
+		when('/about', {
+			templateUrl: 'about.html',
+			controller: 'aboutCont'
+		}).
+		otherwise({
+			redirectTo: '/'
+		});
+	}]);
+
+
+	app.controller('mainCont', function($scope) {
+		$scope.botNavClick = function(id) {
+			document.getElementById(id).className = "tab-item active";
+			for (i=0; i< $scope.botBtns.length;i++){
+				if ($scope.botBtns[i] != id) {
+					document.getElementById($scope.botBtns[i]).className = "tab-item";
+				}
+			}
+		}
+	})
+
+
+	app.controller('indexCont', function($scope) {
+		$scope.title = 'Home Page';
+	})
+	app.controller('mapCont', function($scope) {
+		$scope.title = 'Little Free Libs Map';
+		
+	})
+	app.controller('listCont', function($scope, $http) {
+		$scope.title = 'List of Little Free Libs';
+		$http.get('libLocations.js', {cache:true}).success(function(data) {
+			$scope.locations = data;
+		})
+
+		$scope.currentPage = 0;
+		$scope.pageSize = 20;
+
+		$scope.numberOfPages = function() {
+			return Math.floor($scope.locations.length/$scope.pagesize);
+		};
+
+	})
+	app.controller('aboutCont', function($scope) {
+		$scope.title = 'About';
+	})
+
+	app.filter('startFrom', function() {
+		return function(input, start) {
+			start = +start;
+			return input.slice(start);
+		};
+	})
+
+</script>
+
+</body>
+</html>
