@@ -96,9 +96,12 @@
 	app.controller('indexCont', function($scope) {
 		$scope.title = 'Home Page';
 	})
-	app.controller('mapCont', function($scope) {
+	app.controller('mapCont', function($scope, $http) {
 		$scope.title = 'Little Free Libs Map';
 		$scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
+		$http.get('libLocations.js', {cache:true}).success(function(data) {
+			$scope.locations = data;
+		})
 
 	})
 	app.controller('listCont', function($scope, $http) {

@@ -10,7 +10,7 @@
 	<tr ng-repeat="loc in locations | filter:listSearch">
 		<td>{{loc.state}}</td>
 		<td>{{loc.city}}</td>
-		<td>{{loc.location}}</td>
+		<td>{{loc.latitude + loc.longitude}}</td>
 	</tr>
 </tbody>
 </table>
