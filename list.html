@@ -1,16 +1,13 @@
 <h3 style="text-align:center;">{{title}}</h3>
 <input ng-model="listSearch" type="text" placeholder="Search"/>
-<table class="table table-striped table-bordered">
-<thead>
-	<td>State</td>
-	<td>City</td>
-	<td>Location</td>
-</thead>
-<tbody>
-	<tr ng-repeat="loc in locations | filter:listSearch">
-		<td>{{loc.state}}</td>
-		<td>{{loc.city}}</td>
-		<td>{{loc.latitude + loc.longitude}}</td>
-	</tr>
-</tbody>
-</table>
+<ul class="table-view">
+  <li class="table-view-cell media" ng-repeat="loc in locations | filter: listSearch">
+    <a class="navigate-right">
+      <img class="media-object pull-left" src="{{loc.picture}}">
+      <div class="media-body">
+        {{loc.state + ', ' +loc.city + ': ' + loc.address}}
+        <br>{{loc.description}}
+      </div>
+    </a>
+  </li>
+</ul>
