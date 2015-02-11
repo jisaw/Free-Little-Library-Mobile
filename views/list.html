@@ -1,0 +1,15 @@
+<h3 style="text-align:center;">{{title}}</h3>
+<input ng-model="listSearch" type="text" placeholder="Search"/>
+<ul class="table-view">
+  <li class="table-view-cell media" ng-repeat="loc in locations | filter: listSearch | limitTo: 20">
+    <a class="navigate-right" href="/#/library/{{$index}}">
+      <img class="media-object pull-left" src="{{loc.picture}}" alt="Library Image Missing">
+      <div class="media-body">
+        {{loc.state + ', ' +loc.city}}
+        <br>
+        {{loc.address}}
+        <!--<br>{{loc.description}}-->
+      </div>
+    </a>
+  </li>
+</ul>
