@@ -14,7 +14,7 @@
 <header class="bar bar-nav">
 	<a ng-click="botNavClick('botHome')" href="/#/" class="icon icon-home pull-left"></a>
 	<a ng-click="botNavClick('botList')" href="/#/list" class="icon icon-search pull-right"></a>
-	<h1 class="title">Free Little Library Locator</h1>
+	<h1 class="title" id="top_title">Free Little Library Locator</h1>
 </header>
 </nav>
 
@@ -54,84 +54,6 @@
 <script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
 <script type="text/javascript" src="bower_components/lodash/dist/lodash.js"></script>
 <script type="text/javascript" src="bower_components/angular-google-maps/dist/angular-google-maps.js"></script>
-<script type="text/javascript" src="control.js"></script>
-
-<!--<script>
-	var app = angular.module('APP', ['ngRoute', 'uiGmapgoogle-maps']);
-	app.
-	config(['$routeProvider', function($routeProvider){
-		$routeProvider.
-		when('/', {
-			templateUrl: 'map.html',
-			controller: "indexCont"
-		}).
-		when('/map', {
-			templateUrl: 'map.html',
-			controller: 'mapCont'
-		}).
-		when('/list', {
-			templateUrl: 'list.html',
-			controller: 'listCont'
-		}).
-		when('/about', {
-			templateUrl: 'about.html',
-			controller: 'aboutCont'
-		}).
-		otherwise({
-			redirectTo: '/'
-		});
-	}]);
-
-
-	app.controller('mainCont', function($scope) {
-		$scope.botNavClick = function(id) {
-			document.getElementById(id).className = "tab-item active";
-			for (i=0; i< $scope.botBtns.length;i++){
-				if ($scope.botBtns[i] != id) {
-					document.getElementById($scope.botBtns[i]).className = "tab-item";
-				}
-			}
-		}
-	})
-
-
-	app.controller('indexCont', function($scope) {
-		$scope.title = 'Home Page';
-	})
-	app.controller('mapCont', function($scope, $http) {
-		$scope.title = 'Little Free Libs Map';
-		$scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
-		$http.get('libLocations.js', {cache:true}).success(function(data) {
-			$scope.locations = data;
-		})
-
-	})
-	app.controller('listCont', function($scope, $http) {
-		$scope.title = 'List of Little Free Libs';
-		$http.get('libLocations.js', {cache:true}).success(function(data) {
-			$scope.locations = data;
-		})
-
-		$scope.currentPage = 0;
-		$scope.pageSize = 20;
-
-		$scope.numberOfPages = function() {
-			return Math.floor($scope.locations.length/$scope.pagesize);
-		};
-
-	})
-	app.controller('aboutCont', function($scope) {
-		$scope.title = 'About';
-	})
-
-	app.filter('startFrom', function() {
-		return function(input, start) {
-			start = +start;
-			return input.slice(start);
-		};
-	})
-
-</script>-->
-
+<script type="text/javascript" src="controllers/control.js"></script>
 </body>
 </html>

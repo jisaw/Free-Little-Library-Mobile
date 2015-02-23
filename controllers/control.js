@@ -3,7 +3,7 @@ var app = angular.module('APP', ['ngRoute', 'uiGmapgoogle-maps']);
 	config(['$routeProvider', function($routeProvider){
 		$routeProvider.
 		when('/', {
-			templateUrl: 'views/map.html',
+			templateUrl: 'views/home.html',
 			controller: "indexCont"
 		}).
 		when('/map', {
@@ -48,7 +48,7 @@ var app = angular.module('APP', ['ngRoute', 'uiGmapgoogle-maps']);
 	})
 
 	app.controller('mapCont', function($scope, $http) {
-		$scope.title = 'Little Free Libs Map';
+		$scope.title = 'Map';
 		$scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
 	})
 
